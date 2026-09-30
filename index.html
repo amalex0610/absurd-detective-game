@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>荒謬大懸疑：實況現場 (陰陽怪氣爆笑語音版)</title>
+  <title>荒謬大懸疑：實況現場 (OBS 友善旗艦版)</title>
   <style>
     :root {
-      --comic-border: 5px solid #000;
-      --comic-shadow: 8px 8px 0px #000;
-      --bg-dark: #1b1c24;
+      --comic-border: 4px solid #000;
+      --comic-border-thick: 6px solid #000;
+      --comic-shadow: 6px 6px 0px #000;
+      --comic-shadow-large: 10px 10px 0px #000;
+      --bg-dark: #16171f;
       --paper: #ffffff;
       --yellow: #ffe600;
       --red: #ff2a5f;
@@ -31,7 +33,7 @@
       overflow: hidden;
       font-family: 'Impact', 'Arial Black', 'Noto Sans TC', sans-serif;
       background-color: var(--bg-dark);
-      background-image: radial-gradient(#2d3040 18%, transparent 18%);
+      background-image: radial-gradient(#252836 18%, transparent 18%);
       background-size: 24px 24px;
       display: flex;
       flex-direction: column;
@@ -39,31 +41,33 @@
       justify-content: space-between;
     }
 
-    /* 開始主選單 */
+    /* =========================================
+       開始主選單
+       ========================================= */
     .start-menu-overlay {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at center, #2e3247 0%, #15161d 100%);
+      background: radial-gradient(circle at center, #2e3247 0%, #111217 100%);
       z-index: 20000;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 28px;
+      gap: 24px;
     }
 
     .menu-title-card {
       background: var(--yellow);
       border: 8px solid #000;
-      box-shadow: 16px 16px 0px var(--red);
+      box-shadow: 14px 14px 0px var(--red);
       padding: 24px 48px;
-      transform: rotate(-2deg);
+      transform: rotate(-1.5deg);
       text-align: center;
-      animation: titleBounce 2s infinite ease-in-out;
+      animation: titleBounce 2.5s infinite ease-in-out;
     }
 
     .menu-main-title {
-      font-size: 56px;
+      font-size: 54px;
       font-weight: 900;
       color: #000;
       letter-spacing: 3px;
@@ -72,7 +76,7 @@
     }
 
     .menu-sub-title {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 900;
       color: #222;
       margin-top: 10px;
@@ -82,15 +86,15 @@
     .menu-buttons-group {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
       width: 320px;
     }
 
     .btn-menu-action {
       background: #fff;
-      border: 6px solid #000;
-      box-shadow: 8px 8px 0px #000;
-      font-size: 24px;
+      border: 5px solid #000;
+      box-shadow: 6px 6px 0px #000;
+      font-size: 22px;
       font-weight: 900;
       padding: 12px 20px;
       cursor: pointer;
@@ -105,13 +109,13 @@
     }
 
     .btn-menu-action:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 10px 12px 0px #000;
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 8px 10px 0px #000;
     }
 
     .btn-menu-action:active {
-      transform: translate(4px, 4px);
-      box-shadow: 4px 4px 0px #000;
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0px #000;
     }
 
     .menu-music-tip {
@@ -120,18 +124,20 @@
       font-weight: bold;
     }
 
-    /* 頂部 HUD 與狀態列 */
+    /* =========================================
+       頂部 HUD
+       ========================================= */
     .top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 98%;
-      max-width: 1500px;
+      max-width: 1600px;
       background: var(--yellow);
       border: var(--comic-border);
       box-shadow: var(--comic-shadow);
-      padding: 8px 24px;
-      margin-top: 10px;
+      padding: 6px 20px;
+      margin-top: 8px;
       z-index: 10;
       flex-shrink: 0;
     }
@@ -143,39 +149,39 @@
     }
 
     .shame-badge {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 900;
       background: #000;
       color: #fff;
-      padding: 6px 16px;
+      padding: 4px 14px;
       border-radius: 6px;
       letter-spacing: 1px;
     }
 
     .hearts {
-      font-size: 26px;
-      letter-spacing: 3px;
+      font-size: 24px;
+      letter-spacing: 2px;
     }
 
     .controls-right {
       display: flex;
-      gap: 12px;
+      gap: 10px;
     }
 
     .comic-btn {
       background: #fff;
       border: 3px solid #000;
-      box-shadow: 4px 4px 0 #000;
-      font-size: 16px;
+      box-shadow: 3px 3px 0 #000;
+      font-size: 15px;
       font-weight: 900;
-      padding: 6px 16px;
+      padding: 5px 14px;
       cursor: pointer;
       color: #000;
       transition: transform 0.05s;
     }
     .comic-btn:active {
       transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0 #000;
+      box-shadow: 1px 1px 0 #000;
     }
 
     .btn-mute.is-muted {
@@ -183,29 +189,33 @@
       color: #fff;
     }
 
-    /* 主舞台 */
+    /* =========================================
+       主舞台版面配置 (左側 75% 遊戲區 + 右側 OBS 區)
+       ========================================= */
     .main-stage {
       display: flex;
-      gap: 20px;
+      gap: 18px;
       width: 98%;
-      max-width: 1500px;
-      height: calc(100vh - 84px);
-      padding-bottom: 12px;
+      max-width: 1600px;
+      height: calc(100vh - 78px);
+      padding-bottom: 10px;
     }
 
+    /* 左側主遊戲區 (75%) */
     .game-area {
       flex: 1;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       height: 100%;
+      min-width: 0;
     }
 
     .case-banner {
       background: #fff;
       border: var(--comic-border);
       box-shadow: var(--comic-shadow);
-      padding: 8px 20px;
+      padding: 8px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -213,22 +223,22 @@
     }
 
     .case-title {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 900;
     }
 
     .case-target {
-      font-size: 16px;
+      font-size: 15px;
       color: var(--red);
       font-weight: 900;
     }
 
-    /* 4 格卡槽 */
+    /* 4 格推演卡槽 */
     .slots-container {
       background: #fff;
       border: var(--comic-border);
       box-shadow: var(--comic-shadow);
-      padding: 14px 20px;
+      padding: 12px 18px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -239,13 +249,14 @@
     .slots-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
+      gap: 16px;
       width: 100%;
+      max-width: 980px;
     }
 
     .slot {
-      height: 200px;
-      background: #eef2f5;
+      height: 195px;
+      background: #f1f4f8;
       border: 4px dashed #000;
       border-radius: 12px;
       display: flex;
@@ -253,21 +264,22 @@
       justify-content: center;
       position: relative;
       cursor: pointer;
-      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+      transition: background 0.15s, border-color 0.15s, transform 0.15s, box-shadow 0.15s;
     }
 
     .slot:hover {
-      background: #e3edf7;
+      background: #e3ecf5;
     }
 
     .slot.drag-over {
-      background: #c8e6c9 !important;
+      background: #d4f7dc !important;
       border: 4px solid var(--green) !important;
       transform: scale(1.02);
+      box-shadow: 0 0 12px var(--green);
     }
 
     .slot.selected-swap {
-      border: 5px solid var(--cyan) !important;
+      border: 4px solid var(--cyan) !important;
       background: #e0f7fa !important;
       box-shadow: 0 0 14px var(--cyan);
     }
@@ -278,59 +290,77 @@
       left: 6px;
       background: #000;
       color: #fff;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 900;
-      padding: 2px 10px;
+      padding: 2px 8px;
       border-radius: 6px;
       z-index: 2;
     }
 
     .slot-empty-hint {
       color: #888ea8;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 900;
       pointer-events: none;
       text-align: center;
       line-height: 1.4;
     }
 
+    /* 播放大按鈕：置中加強 + 呼吸燈效果 */
     .btn-action-play {
       background: var(--red);
       color: #fff;
       font-size: 24px;
       font-weight: 900;
-      padding: 10px 48px;
+      padding: 10px 52px;
       border: var(--comic-border);
       box-shadow: var(--comic-shadow);
       cursor: pointer;
       letter-spacing: 2px;
+      animation: pulseButton 2s infinite;
+      transition: transform 0.1s;
     }
-    .btn-action-play:hover { transform: scale(1.02); }
-    .btn-action-play:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 #000; }
 
-    /* 卡片庫 */
+    .btn-action-play:hover {
+      transform: scale(1.04);
+      animation: none;
+    }
+
+    .btn-action-play:active {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0 #000;
+    }
+
+    @keyframes pulseButton {
+      0% { transform: scale(1); box-shadow: var(--comic-shadow); }
+      50% { transform: scale(1.025); box-shadow: 0 0 16px var(--red), var(--comic-shadow); }
+      100% { transform: scale(1); box-shadow: var(--comic-shadow); }
+    }
+
+    /* 下方手牌庫 (水平置中) */
     .card-pool {
       display: flex;
-      gap: 14px;
+      gap: 12px;
       justify-content: center;
       align-items: center;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.55);
       border: var(--comic-border);
       border-radius: 14px;
-      padding: 12px 16px;
+      padding: 10px 14px;
       flex-grow: 1;
-      max-height: 240px;
+      max-height: 235px;
       transition: background 0.2s;
     }
 
     .card-pool.drag-over {
-      background: rgba(255, 230, 0, 0.3) !important;
-      border-color: var(--yellow);
+      background: rgba(255, 230, 0, 0.25) !important;
+      box-shadow: inset 0 0 14px var(--yellow);
     }
 
+    /* 卡片設計：Emoji 與文字放大 */
     .card {
-      width: 150px;
-      height: 200px;
+      width: 145px;
+      height: 195px;
       background: #fff;
       border: 4px solid #000;
       box-shadow: 5px 5px 0px #000;
@@ -339,7 +369,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 8px;
+      padding: 6px;
       cursor: grab;
       position: relative;
       transition: transform 0.12s, box-shadow 0.12s;
@@ -348,7 +378,7 @@
 
     .card:hover {
       transform: translateY(-6px) scale(1.03);
-      box-shadow: 7px 9px 0px #000;
+      box-shadow: 6px 8px 0px var(--cyan);
     }
 
     .card:active {
@@ -363,12 +393,12 @@
     .card-sketch {
       width: 100%;
       height: 125px;
-      background: #fafafa;
+      background: #fbfbfb;
       border: 3px solid #000;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 56px;
+      font-size: 64px; /* 放大 Emoji，手機與遠距清晰辨識 */
       position: relative;
       pointer-events: none;
     }
@@ -385,32 +415,93 @@
       overflow: hidden;
       text-overflow: ellipsis;
       pointer-events: none;
+      color: #000;
     }
 
-    /* 聊天室側欄 */
-    .stream-chat {
+    /* =========================================
+       右側 OBS 實況友善區 (約 300px)
+       ========================================= */
+    .streamer-sidebar {
       width: 300px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      height: 100%;
+      flex-shrink: 0;
+    }
+
+    /* 右上方：實況主視訊框預留區 (16:9) */
+    .facecam-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: rgba(0, 0, 0, 0.4);
+      border: 3px dashed var(--yellow);
+      border-radius: 10px;
+      box-shadow: var(--comic-shadow);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .facecam-placeholder::after {
+      content: 'CAM SPACE (16:9)';
+      position: absolute;
+      bottom: 6px;
+      font-size: 11px;
+      font-weight: 900;
+      color: var(--yellow);
+      letter-spacing: 1px;
+    }
+
+    .facecam-icon {
+      font-size: 32px;
+      margin-bottom: 4px;
+      animation: camBlink 2s infinite ease-in-out;
+    }
+
+    .facecam-text {
+      font-size: 13px;
+      font-weight: 900;
+      color: #e0e0e0;
+      background: #000;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    @keyframes camBlink {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 0.3; }
+    }
+
+    /* 右下方：實況彈幕聊天室 (自適應到底部) */
+    .stream-chat {
+      flex: 1;
       background: #fff;
       border: var(--comic-border);
       box-shadow: var(--comic-shadow);
       display: flex;
       flex-direction: column;
-      height: 100%;
+      min-height: 0;
     }
 
     .chat-header {
       background: #000;
       color: #fff;
-      padding: 10px 14px;
-      font-size: 18px;
+      padding: 8px 12px;
+      font-size: 16px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-shrink: 0;
     }
 
     .live-dot {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       background: var(--red);
       border-radius: 50%;
       display: inline-block;
@@ -420,12 +511,12 @@
     .chat-messages {
       flex: 1;
       overflow-y: hidden;
-      padding: 12px;
+      padding: 10px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       font-family: sans-serif;
-      font-size: 15px;
+      font-size: 14px;
       background: #f7f9fa;
     }
 
@@ -433,17 +524,19 @@
       background: #fff;
       border: 2px solid #000;
       border-radius: 6px;
-      padding: 6px 10px;
-      line-height: 1.4;
+      padding: 6px 8px;
+      line-height: 1.35;
       animation: slideIn 0.2s ease-out;
     }
     .chat-user {
       font-weight: 900;
       color: var(--purple);
-      margin-right: 6px;
+      margin-right: 4px;
     }
 
-    /* 滿版演播室 (THEATER) */
+    /* =========================================
+       滿版演播室 (THEATER) - 避開右側視訊鏡頭
+       ========================================= */
     .theater-screen {
       position: fixed;
       inset: 0;
@@ -453,7 +546,7 @@
       align-items: center;
       justify-content: center;
       z-index: 9999;
-      padding: 4vw;
+      padding: 2vw;
     }
 
     .playback-blocker {
@@ -464,41 +557,43 @@
       display: none;
     }
 
+    /* 寬度適中、略微左偏置中，防止遮擋右上角視訊 */
     .comic-stage {
       background: #fff;
-      border: 8px solid #000;
-      box-shadow: 14px 14px 0 var(--red);
-      width: 100%;
-      max-width: 860px;
-      padding: 28px;
+      border: 7px solid #000;
+      box-shadow: 12px 12px 0 var(--red);
+      width: 90%;
+      max-width: 800px;
+      padding: 24px;
       position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
       cursor: default;
       z-index: 10002;
+      transform: translateX(-50px); /* 略微左偏，預留右上 OBS 視角 */
     }
 
     .comic-frame-number {
       position: absolute;
-      top: -24px;
+      top: -22px;
       left: 16px;
       background: var(--yellow);
       border: 4px solid #000;
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 900;
-      padding: 4px 18px;
+      padding: 3px 16px;
     }
 
     .comic-viewport {
       width: 100%;
-      height: 300px;
+      height: 290px;
       border: 5px solid #000;
       background: #fdfdfd;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 120px;
+      font-size: 110px;
       position: relative;
       overflow: hidden;
     }
@@ -511,30 +606,160 @@
     }
 
     .comic-caption-box {
-      margin-top: 20px;
-      font-size: 24px;
+      margin-top: 18px;
+      font-size: 23px;
       font-weight: 900;
       line-height: 1.5;
       text-align: center;
-      min-height: 80px;
+      min-height: 75px;
       color: #000;
     }
 
+    /* 結尾判定印章：由大到小砸下 (Scale 2.2 ➔ 1.0) 動畫 */
     .comic-stamp {
       position: absolute;
-      right: 24px;
-      bottom: 24px;
+      right: 20px;
+      bottom: 20px;
       border: 8px solid var(--red);
       color: var(--red);
-      background: rgba(255, 255, 255, 0.95);
-      font-size: 38px;
+      background: rgba(255, 255, 255, 0.96);
+      font-size: 40px;
       font-weight: 900;
-      padding: 8px 22px;
-      transform: rotate(-12deg) scale(0);
-      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      padding: 8px 24px;
+      opacity: 0;
+      transform: rotate(-12deg) scale(2.2);
+      pointer-events: none;
       z-index: 10;
     }
-    .comic-stamp.show { transform: rotate(-12deg) scale(1); }
+
+    .comic-stamp.show {
+      animation: stampImpact 0.35s cubic-bezier(0.12, 0.85, 0.35, 1.2) forwards;
+    }
+
+    @keyframes stampImpact {
+      0% { opacity: 0; transform: rotate(-15deg) scale(2.2); }
+      70% { opacity: 1; transform: rotate(-12deg) scale(0.9); }
+      100% { opacity: 1; transform: rotate(-12deg) scale(1.0); }
+    }
+
+    /* =========================================
+       關卡機密任務簡報彈窗 (CASE BRIEF)
+       ========================================= */
+    .case-brief-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      z-index: 24000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .case-brief-box {
+      background: #fff;
+      border: 8px solid #000;
+      box-shadow: 14px 14px 0px var(--yellow);
+      max-width: 660px;
+      width: 100%;
+      padding: 28px 32px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .brief-badge {
+      align-self: flex-start;
+      background: #000;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 900;
+      padding: 4px 12px;
+      letter-spacing: 1px;
+    }
+
+    .brief-title {
+      font-size: 32px;
+      font-weight: 900;
+      color: #000;
+      margin: 0;
+      line-height: 1.25;
+      border-bottom: 4px solid #000;
+      padding-bottom: 8px;
+    }
+
+    .brief-section {
+      background: #f7f9fc;
+      border: 3px solid #000;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .brief-label {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--purple);
+    }
+
+    .brief-desc {
+      font-size: 18px;
+      font-weight: bold;
+      line-height: 1.5;
+      color: #222;
+      margin: 0;
+    }
+
+    .brief-target-box {
+      background: #fff3f5;
+      border: 3px solid var(--red);
+      padding: 10px 14px;
+    }
+
+    .brief-target-text {
+      font-size: 18px;
+      font-weight: 900;
+      color: var(--red);
+      margin: 0;
+    }
+
+    .brief-btn-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    .btn-accept-case {
+      background: var(--green);
+      color: #000;
+      font-size: 24px;
+      font-weight: 900;
+      border: 5px solid #000;
+      box-shadow: 6px 6px 0 #000;
+      padding: 10px 36px;
+      cursor: pointer;
+      transition: transform 0.1s;
+    }
+
+    .btn-accept-case:hover {
+      transform: scale(1.04);
+      background: #04be8c;
+    }
+
+    .btn-accept-case:active {
+      transform: translate(3px, 3px);
+      box-shadow: 2px 2px 0 #000;
+    }
+
+    .brief-key-hint {
+      color: #666;
+      font-size: 14px;
+      font-weight: bold;
+    }
 
     /* 處刑與全通關 MODALS */
     .overlay-modal {
@@ -591,7 +816,7 @@
     }
 
     @keyframes titleBounce {
-      0%, 100% { transform: rotate(-2deg) translateY(0); }
+      0%, 100% { transform: rotate(-1.5deg) translateY(0); }
       50% { transform: rotate(1.5deg) translateY(-8px); }
     }
     @keyframes popIn {
@@ -610,7 +835,9 @@
 </head>
 <body id="appBody">
 
-  <!-- 遊戲首頁開始選單 -->
+  <!-- =========================================
+       遊戲首頁開始選單
+       ========================================= -->
   <div class="start-menu-overlay" id="startMenuScreen" onclick="tryPlayMenuBGM()">
     <div class="menu-title-card">
       <h1 class="menu-main-title">🕵️ 荒謬大懸疑：實況現場</h1>
@@ -623,7 +850,7 @@
       <button class="btn-menu-action" id="menuMuteBtn" onclick="toggleMute(event)">🔊 聲音：開</button>
     </div>
 
-    <div class="menu-music-tip">💡 支援自由拖曳、點擊對調與自動入槽 💡</div>
+    <div class="menu-music-tip">💡 支援自由拖曳、點擊對調與 OBS 實況友善排版 💡</div>
   </div>
 
   <!-- 頂部 HUD -->
@@ -639,15 +866,18 @@
     </div>
   </div>
 
-  <!-- 主舞台 -->
+  <!-- =========================================
+       主舞台：左側主遊戲區 + 右側 OBS 區
+       ========================================= -->
   <div class="main-stage">
+    <!-- 左側 75% 遊戲主控區 -->
     <div class="game-area">
       <div class="case-banner">
         <div class="case-title" id="caseTitle">第 1 關：美術館名畫消失之謎</div>
-        <div class="case-target" id="caseTarget">操作方式：可自由拖曳、點卡片自動放入、或點兩個卡槽對調！</div>
+        <div class="case-target" id="caseTarget">操作方式：自由拖曳、點卡片自動放入、或點兩個卡槽對調！</div>
       </div>
 
-      <!-- 4 格卡槽 -->
+      <!-- 4 格推演卡槽 -->
       <div class="slots-container">
         <div class="slots-grid">
           <div class="slot" data-index="0" onclick="handleSlotInteraction(0)">
@@ -667,22 +897,61 @@
             <span class="slot-empty-hint">拖曳 / 點擊放入</span>
           </div>
         </div>
+        <!-- 呼吸燈置中大按鈕 -->
         <button class="btn-action-play" onclick="startComicShow()">▶ 演出這部漫畫！</button>
       </div>
 
-      <!-- 下方卡片庫 -->
+      <!-- 下方 6 張備選卡片庫 -->
       <div class="card-pool" id="cardPool"></div>
     </div>
 
-    <!-- 實況彈幕聊天室 -->
-    <div class="stream-chat">
-      <div class="chat-header">
-        <span>🔴 實況彈幕室</span>
-        <span class="live-dot"></span>
+    <!-- 右側 OBS 專屬側邊欄 (300px) -->
+    <div class="streamer-sidebar">
+      <!-- 實況主視訊框預留區 (16:9) -->
+      <div class="facecam-placeholder">
+        <div class="facecam-icon">📹</div>
+        <div class="facecam-text">OBS WEBCAM 視訊框</div>
       </div>
-      <div class="chat-messages" id="chatBox">
-        <div class="chat-msg"><span class="chat-user">觀眾老李:</span> 主播準備好被語音洗臉了嗎？</div>
-        <div class="chat-msg"><span class="chat-user">百萬賭徒:</span> 賭 100 塊主播這把又要在天台見</div>
+
+      <!-- 實況彈幕聊天室 (自適應延伸到底) -->
+      <div class="stream-chat">
+        <div class="chat-header">
+          <span>🔴 實況彈幕室</span>
+          <span class="live-dot"></span>
+        </div>
+        <div class="chat-messages" id="chatBox">
+          <div class="chat-msg"><span class="chat-user">觀眾老李:</span> 主播準備好被語音洗臉了嗎？</div>
+          <div class="chat-msg"><span class="chat-user">百萬賭徒:</span> 賭 100 塊主播這把又要在天台見</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================
+       關卡機密任務簡報彈窗 (CASE BRIEF MODAL)
+       ========================================= -->
+  <div class="case-brief-modal" id="caseBriefModal">
+    <div class="case-brief-box">
+      <div class="brief-badge">CLASSIFIED BRIEFING // 機密案卷</div>
+      <h2 class="brief-title" id="briefTitle">第 1 關・美術館名畫消失之謎</h2>
+      
+      <div class="brief-section">
+        <div class="brief-label">🕵️‍♂️ 案發簡報：</div>
+        <p class="brief-desc" id="briefDesc">
+          展覽館大門緊鎖、警報毫無動靜，價值連城的世紀名畫卻離奇蒸發！現場地面殘留著滑膩的不明液體與一道詭異擦痕...
+        </p>
+      </div>
+
+      <div class="brief-target-box">
+        <div class="brief-label" style="color: var(--red);">🎯 委託目標：</div>
+        <p class="brief-target-text" id="briefTarget">
+          還原現場 4 步作案軌跡，揪出將名畫洗劫一空的真正狠角色！
+        </p>
+      </div>
+
+      <div class="brief-btn-row">
+        <div class="brief-key-hint">💡 提示：按 [Enter] 或 [空白鍵] 可快速接案</div>
+        <button class="btn-accept-case" onclick="acceptCaseBrief()">接案偵查 ➔</button>
       </div>
     </div>
   </div>
@@ -734,7 +1003,7 @@
         【歷史性的一刻！】<br>
         三大真兇：<b>清潔阿姨、掃地機器人、大肥橘貓</b> 同台牽手，獲頒聯合國「維護世界和平勳章」！<br><br>
         <span style="color: var(--red); font-size: 24px;">
-          👨‍⚖️ 法官敲槌判決：「實況主偵探因揭穿太多蠢事，嚴重破壞社會和諧！當場逮捕！帶走！」
+          👨‍‍⚖️ 法官敲槌判決：「實況主偵探因揭穿太多蠢事，嚴重破壞社會和諧！當場逮捕！帶走！」
         </span>
       </div>
       <div style="font-size: 50px;">
@@ -755,7 +1024,7 @@
         👉 <b>快速點擊：</b> 點擊下方卡片自動填入第一個空槽；點選上方卡槽可退回卡池。<br>
         👉 <b>卡槽對調：</b> 先後點擊兩個已放卡的卡槽，即可瞬間對調位置！<br>
         👉 <b>播放推演：</b> 排滿 4 格後點擊「▶ 演出這部漫畫」，觀賞荒謬因果！<br>
-        👉 <b>留意體力：</b> 每關擁有 3 顆愛心 ❤️❤️❤️️，猜錯會扣血喔！
+        👉 <b>留意體力：</b> 每關擁有 3 顆愛心 ❤️❤️❤️，猜錯會扣血喔！
       </div>
       <button class="comic-btn" style="background: var(--yellow); font-size: 22px; padding: 10px 32px;" onclick="closeTutorial()">我知道了，出發！</button>
     </div>
@@ -854,7 +1123,7 @@
     }
 
     /* =========================================
-       2. 1.5 倍速噴飯專屬語音庫 (答錯搞心態 / 答對陰陽怪氣)
+       2. 1.5 倍速語音庫
        ========================================= */
     function speak15x(text) {
       if (isMuted || !('speechSynthesis' in window)) return;
@@ -867,7 +1136,6 @@
       window.speechSynthesis.speak(utter);
     }
 
-    // 答錯嘲諷庫
     const TAUNT_SPEECHES = [
       { text: "笑死！這因果關係你敢排？我把滑鼠綁在我阿嬤的輪椅上，讓她滑過來排都比你合邏輯！", tag: "阿嬤開台" },
       { text: "嗶嗶！系統檢測到現場有一名實況主智商正在以跳水速度跌停板！請觀眾立刻遠離螢幕，避免被降智感染！", tag: "智商跌停" },
@@ -876,7 +1144,6 @@
       { text: "這操作連我家那隻只會舔毛的貓看了都直搖頭，並且留下了兩滴同情的眼淚。扣血！下去反省！", tag: "貓都搖頭" }
     ];
 
-    // 答對陰陽怪氣庫
     const PRAISE_SPEECHES = [
       { text: "天啊！奇蹟出現了！瞎貓居然真的踩死了一隻特大號耗子！聊天室快截圖，這可能是主播這輩子唯一的智商高光時刻！", tag: "瞎貓踩死耗子" },
       { text: "全體起立！福爾摩斯轉世！柯南看了連夜買站票逃跑！這匪夷所思的答案居然能被你矇對，你老實交代是不是偷偷看了攻略？！", tag: "絕對偷看攻略" },
@@ -957,11 +1224,14 @@
     }
 
     /* =========================================
-       4. 豐富彩蛋與專屬打臉判定矩陣
+       4. 關卡與機密任務簡報資料庫
        ========================================= */
     const LEVEL_DATA = {
       1: {
         title: "第 1 關：美術館名畫消失之謎",
+        briefTitle: "第 1 關・美術館名畫消失之謎",
+        briefDesc: "展覽館大門緊鎖、警報毫無動靜，價值連城的世紀名畫卻離奇蒸發！現場地面殘留著滑膩的不明液體與一道詭異擦痕...",
+        briefTarget: "還原現場 4 步作案軌跡，抓出將名畫洗劫一空的真正狠角色！",
         target: "目標：推導出名畫被洗成抹布的真正順序！",
         cards: [
           { id: "A", emoji: "🥷🪟", title: "小偷破窗潛入！", label: "A: 破窗潛入" },
@@ -1011,6 +1281,9 @@
       },
       2: {
         title: "第 2 關：深夜機房斷線大慘案",
+        briefTitle: "第 2 關・深夜機房斷線大慘案",
+        briefDesc: "實況開到一半突然全網斷線，數萬觀眾黑屏哀嚎！最高機密機房內伺服器紅燈狂閃，現場散落著斷裂的粗黑線路與半塊起司...",
+        briefTarget: "重組機房深夜 4 步混亂軌跡，找出引爆全網大癱瘓的罪魁禍首！",
         target: "目標：揪出讓全機房斷線的真正元兇！",
         cards: [
           { id: "A", emoji: "🕶️🪓", title: "特務黑客帥氣垂降入侵！", label: "A: 特務降臨" },
@@ -1055,6 +1328,9 @@
       },
       3: {
         title: "第 3 關：華爾街黑色星期五崩盤案",
+        briefTitle: "第 3 關・華爾街黑色星期五崩盤案",
+        briefDesc: "華爾街操盤大廳警報長鳴，全球指數瞬間斷崖式崩跌！頂級經理人抱頭崩潰，最後一筆萬億級拋售單竟來自一台神秘鍵盤...",
+        briefTarget: "推演出這場全球金融核爆的 4 步關鍵骨牌，見證終極因果！",
         target: "目標：推導出引爆全球金融海嘯的終極荒謬因果！",
         cards: [
           { id: "A", emoji: "🕶️💼", title: "金融巨鱷獰笑按放空按鈕！", label: "A: 巨鱷放空" },
@@ -1125,7 +1401,6 @@
       setTimeout(() => document.getElementById('appBody').classList.remove('shake-screen'), 400);
 
       if (mistakes < 3) {
-        // 隨機抽選 1.5 倍速狂暴嘲諷
         const item = TAUNT_SPEECHES[Math.floor(Math.random() * TAUNT_SPEECHES.length)];
         speak15x(item.text);
         pushChatMessage('fail_special', item.tag);
@@ -1148,7 +1423,7 @@
     }
 
     /* =========================================
-       6. 實況彈幕聊天室 (深度連動語音梗)
+       6. 實況彈幕聊天室
        ========================================= */
     const CHAT_LIBRARY = {
       idle: [
@@ -1217,6 +1492,10 @@
       currentLevel = lvl;
       selectedSlotForSwap = null;
       const lvlData = LEVEL_DATA[lvl];
+
+      // 彈出機密任務簡報彈窗
+      showCaseBrief(lvlData);
+
       document.getElementById('caseTitle').textContent = lvlData.title;
 
       document.querySelectorAll('.slot').forEach(s => {
@@ -1235,6 +1514,30 @@
       });
       updateStatusHUD();
     }
+
+    function showCaseBrief(lvlData) {
+      document.getElementById('briefTitle').textContent = lvlData.briefTitle;
+      document.getElementById('briefDesc').textContent = lvlData.briefDesc;
+      document.getElementById('briefTarget').textContent = lvlData.briefTarget;
+      document.getElementById('caseBriefModal').style.display = 'flex';
+      sfxCardThud();
+    }
+
+    function acceptCaseBrief() {
+      sfxCardSwap();
+      document.getElementById('caseBriefModal').style.display = 'none';
+    }
+
+    // 支援按 Enter 或 空格鍵 快速跳過任務簡報
+    window.addEventListener('keydown', (e) => {
+      const briefModal = document.getElementById('caseBriefModal');
+      if (briefModal && briefModal.style.display === 'flex') {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          acceptCaseBrief();
+        }
+      }
+    });
 
     function createCardElement(c) {
       const cardEl = document.createElement('div');
@@ -1341,7 +1644,6 @@
       slotB.querySelector('.slot-empty-hint').style.display = slotB.querySelector('.card') ? 'none' : 'block';
     }
 
-    // 拖曳放置目標
     const dropZones = [...document.querySelectorAll('.slot'), document.getElementById('cardPool')];
     dropZones.forEach(zone => {
       zone.addEventListener('dragover', (e) => {
@@ -1394,7 +1696,7 @@
     });
 
     /* =========================================
-       8. 漫畫放映與結局演繹 (結合語音與音效)
+       8. 漫畫放映與結局演繹
        ========================================= */
     function startComicShow() {
       const slots = document.querySelectorAll('.slot');
@@ -1464,7 +1766,6 @@
       if (result.success) {
         sfxVictoryBell();
 
-        // 答對時：隨機抽選陰陽怪氣語音，聊天室狂刷
         const item = PRAISE_SPEECHES[Math.floor(Math.random() * PRAISE_SPEECHES.length)];
         speak15x(item.text);
         pushChatMessage('win_special', item.tag);
@@ -1489,7 +1790,13 @@
       stampEl.textContent = result.stamp;
       stampEl.style.borderColor = result.stampColor;
       stampEl.style.color = result.stampColor;
-      stampEl.classList.add('show');
+
+      // 觸發重砸震動動畫
+      setTimeout(() => {
+        stampEl.classList.add('show');
+        document.getElementById('comicStageBox').classList.add('shake-screen');
+        setTimeout(() => document.getElementById('comicStageBox').classList.remove('shake-screen'), 350);
+      }, 50);
 
       setTimeout(() => {
         blocker.style.display = 'none';
