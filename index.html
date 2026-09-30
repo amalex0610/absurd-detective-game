@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>荒謬大懸疑：實況現場 (陰陽怪氣爆笑語音版)</title>
+  <style>
+    :root {
+      --comic-border: 5px solid #000;
+      --comic-shadow: 8px 8px 0px #000;
+      --bg-dark: #1b1c24;
+      --paper: #ffffff;
+      --yellow: #ffe600;
+      --red: #ff2a5f;
+      --green: #05d59e;
+      --cyan: #00d2d3;
+      --purple: #9b51e0;
+    }
+
+    * {
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Impact', 'Arial Black', 'Noto Sans TC', sans-serif;
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(#2d3040 18%, transparent 18%);
+      background-size: 24px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* 開始主選單 */
+    .start-menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #2e3247 0%, #15161d 100%);
+      z-index: 20000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+
+    .menu-title-card {
+      background: var(--yellow);
+      border: 8px solid #000;
+      box-shadow: 16px 16px 0px var(--red);
+      padding: 24px 48px;
+      transform: rotate(-2deg);
+      text-align: center;
+      animation: titleBounce 2s infinite ease-in-out;
+    }
+
+    .menu-main-title {
+      font-size: 56px;
+      font-weight: 900;
+      color: #000;
+      letter-spacing: 3px;
+      margin: 0;
+      text-shadow: 2px 2px 0px #fff;
+    }
+
+    .menu-sub-title {
+      font-size: 22px;
+      font-weight: 900;
+      color: #222;
+      margin-top: 10px;
+      letter-spacing: 1px;
+    }
+
+    .menu-buttons-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 320px;
+    }
+
+    .btn-menu-action {
+      background: #fff;
+      border: 6px solid #000;
+      box-shadow: 8px 8px 0px #000;
+      font-size: 24px;
+      font-weight: 900;
+      padding: 12px 20px;
+      cursor: pointer;
+      color: #000;
+      transition: transform 0.1s, box-shadow 0.1s;
+      text-align: center;
+    }
+
+    .btn-menu-action.start-btn {
+      background: var(--green);
+      color: #000;
+    }
+
+    .btn-menu-action:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 10px 12px 0px #000;
+    }
+
+    .btn-menu-action:active {
+      transform: translate(4px, 4px);
+      box-shadow: 4px 4px 0px #000;
+    }
+
+    .menu-music-tip {
+      color: #8d95af;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    /* 頂部 HUD 與狀態列 */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 98%;
+      max-width: 1500px;
+      background: var(--yellow);
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      padding: 8px 24px;
+      margin-top: 10px;
+      z-index: 10;
+      flex-shrink: 0;
+    }
+
+    .status-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .shame-badge {
+      font-size: 20px;
+      font-weight: 900;
+      background: #000;
+      color: #fff;
+      padding: 6px 16px;
+      border-radius: 6px;
+      letter-spacing: 1px;
+    }
+
+    .hearts {
+      font-size: 26px;
+      letter-spacing: 3px;
+    }
+
+    .controls-right {
+      display: flex;
+      gap: 12px;
+    }
+
+    .comic-btn {
+      background: #fff;
+      border: 3px solid #000;
+      box-shadow: 4px 4px 0 #000;
+      font-size: 16px;
+      font-weight: 900;
+      padding: 6px 16px;
+      cursor: pointer;
+      color: #000;
+      transition: transform 0.05s;
+    }
+    .comic-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 #000;
+    }
+
+    .btn-mute.is-muted {
+      background: #ff5252;
+      color: #fff;
+    }
+
+    /* 主舞台 */
+    .main-stage {
+      display: flex;
+      gap: 20px;
+      width: 98%;
+      max-width: 1500px;
+      height: calc(100vh - 84px);
+      padding-bottom: 12px;
+    }
+
+    .game-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .case-banner {
+      background: #fff;
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      padding: 8px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .case-title {
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .case-target {
+      font-size: 16px;
+      color: var(--red);
+      font-weight: 900;
+    }
+
+    /* 4 格卡槽 */
+    .slots-container {
+      background: #fff;
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      padding: 14px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      width: 100%;
+    }
+
+    .slot {
+      height: 200px;
+      background: #eef2f5;
+      border: 4px dashed #000;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s, transform 0.15s;
+    }
+
+    .slot:hover {
+      background: #e3edf7;
+    }
+
+    .slot.drag-over {
+      background: #c8e6c9 !important;
+      border: 4px solid var(--green) !important;
+      transform: scale(1.02);
+    }
+
+    .slot.selected-swap {
+      border: 5px solid var(--cyan) !important;
+      background: #e0f7fa !important;
+      box-shadow: 0 0 14px var(--cyan);
+    }
+
+    .slot-badge {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: #000;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 900;
+      padding: 2px 10px;
+      border-radius: 6px;
+      z-index: 2;
+    }
+
+    .slot-empty-hint {
+      color: #888ea8;
+      font-size: 15px;
+      font-weight: 900;
+      pointer-events: none;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .btn-action-play {
+      background: var(--red);
+      color: #fff;
+      font-size: 24px;
+      font-weight: 900;
+      padding: 10px 48px;
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      cursor: pointer;
+      letter-spacing: 2px;
+    }
+    .btn-action-play:hover { transform: scale(1.02); }
+    .btn-action-play:active { transform: translate(4px, 4px); box-shadow: 2px 2px 0 #000; }
+
+    /* 卡片庫 */
+    .card-pool {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.5);
+      border: var(--comic-border);
+      border-radius: 14px;
+      padding: 12px 16px;
+      flex-grow: 1;
+      max-height: 240px;
+      transition: background 0.2s;
+    }
+
+    .card-pool.drag-over {
+      background: rgba(255, 230, 0, 0.3) !important;
+      border-color: var(--yellow);
+    }
+
+    .card {
+      width: 150px;
+      height: 200px;
+      background: #fff;
+      border: 4px solid #000;
+      box-shadow: 5px 5px 0px #000;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px;
+      cursor: grab;
+      position: relative;
+      transition: transform 0.12s, box-shadow 0.12s;
+      animation: popIn 0.2s ease-out;
+    }
+
+    .card:hover {
+      transform: translateY(-6px) scale(1.03);
+      box-shadow: 7px 9px 0px #000;
+    }
+
+    .card:active {
+      cursor: grabbing;
+      transform: scale(0.96);
+    }
+
+    .card.dragging-origin {
+      opacity: 0.35;
+    }
+
+    .card-sketch {
+      width: 100%;
+      height: 125px;
+      background: #fafafa;
+      border: 3px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 56px;
+      position: relative;
+      pointer-events: none;
+    }
+
+    .card-caption {
+      font-size: 16px;
+      font-weight: 900;
+      background: var(--yellow);
+      border: 3px solid #000;
+      padding: 4px 2px;
+      width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      pointer-events: none;
+    }
+
+    /* 聊天室側欄 */
+    .stream-chat {
+      width: 300px;
+      background: #fff;
+      border: var(--comic-border);
+      box-shadow: var(--comic-shadow);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .chat-header {
+      background: #000;
+      color: #fff;
+      padding: 10px 14px;
+      font-size: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .live-dot {
+      width: 12px;
+      height: 12px;
+      background: var(--red);
+      border-radius: 50%;
+      display: inline-block;
+      animation: blink 1s infinite;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: hidden;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-family: sans-serif;
+      font-size: 15px;
+      background: #f7f9fa;
+    }
+
+    .chat-msg {
+      background: #fff;
+      border: 2px solid #000;
+      border-radius: 6px;
+      padding: 6px 10px;
+      line-height: 1.4;
+      animation: slideIn 0.2s ease-out;
+    }
+    .chat-user {
+      font-weight: 900;
+      color: var(--purple);
+      margin-right: 6px;
+    }
+
+    /* 滿版演播室 (THEATER) */
+    .theater-screen {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.96);
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      padding: 4vw;
+    }
+
+    .playback-blocker {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: transparent;
+      display: none;
+    }
+
+    .comic-stage {
+      background: #fff;
+      border: 8px solid #000;
+      box-shadow: 14px 14px 0 var(--red);
+      width: 100%;
+      max-width: 860px;
+      padding: 28px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: default;
+      z-index: 10002;
+    }
+
+    .comic-frame-number {
+      position: absolute;
+      top: -24px;
+      left: 16px;
+      background: var(--yellow);
+      border: 4px solid #000;
+      font-size: 22px;
+      font-weight: 900;
+      padding: 4px 18px;
+    }
+
+    .comic-viewport {
+      width: 100%;
+      height: 300px;
+      border: 5px solid #000;
+      background: #fdfdfd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 120px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .speedlines {
+      position: absolute;
+      inset: 0;
+      background: repeating-conic-gradient(from 0deg, transparent 0deg 12deg, rgba(0,0,0,0.07) 12deg 24deg);
+      pointer-events: none;
+    }
+
+    .comic-caption-box {
+      margin-top: 20px;
+      font-size: 24px;
+      font-weight: 900;
+      line-height: 1.5;
+      text-align: center;
+      min-height: 80px;
+      color: #000;
+    }
+
+    .comic-stamp {
+      position: absolute;
+      right: 24px;
+      bottom: 24px;
+      border: 8px solid var(--red);
+      color: var(--red);
+      background: rgba(255, 255, 255, 0.95);
+      font-size: 38px;
+      font-weight: 900;
+      padding: 8px 22px;
+      transform: rotate(-12deg) scale(0);
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 10;
+    }
+    .comic-stamp.show { transform: rotate(-12deg) scale(1); }
+
+    /* 處刑與全通關 MODALS */
+    .overlay-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 25000;
+      padding: 20px;
+    }
+
+    .punish-box {
+      background: #f0f0f0;
+      border: 8px solid #000;
+      box-shadow: 14px 14px 0 #000;
+      max-width: 700px;
+      width: 100%;
+      padding: 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .apology-paper {
+      background: #fff;
+      border: 3px solid #666;
+      padding: 20px;
+      text-align: left;
+      font-family: serif;
+      font-size: 18px;
+      line-height: 1.8;
+      color: #222;
+      width: 100%;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .victory-box {
+      background: var(--yellow);
+      border: 8px solid #000;
+      box-shadow: 14px 14px 0 var(--green);
+      max-width: 780px;
+      width: 100%;
+      padding: 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes titleBounce {
+      0%, 100% { transform: rotate(-2deg) translateY(0); }
+      50% { transform: rotate(1.5deg) translateY(-8px); }
+    }
+    @keyframes popIn {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    @keyframes blink { 50% { opacity: 0.2; } }
+    @keyframes slideIn { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .shake-screen { animation: shake 0.4s ease-in-out; }
+    @keyframes shake {
+      0%, 100% { transform: translate(0, 0); }
+      20%, 60% { transform: translate(-10px, 6px); }
+      40%, 80% { transform: translate(10px, -6px); }
+    }
+  </style>
+</head>
+<body id="appBody">
+
+  <!-- 遊戲首頁開始選單 -->
+  <div class="start-menu-overlay" id="startMenuScreen" onclick="tryPlayMenuBGM()">
+    <div class="menu-title-card">
+      <h1 class="menu-main-title">🕵️ 荒謬大懸疑：實況現場</h1>
+      <div class="menu-sub-title">💥 原創四格漫畫推理解謎・專為實況爆笑打造 💥</div>
+    </div>
+
+    <div class="menu-buttons-group">
+      <button class="btn-menu-action start-btn" onclick="onStartGameClicked(event)">▶ 開始遊戲</button>
+      <button class="btn-menu-action" onclick="onTutorialClicked(event)">📖 新手指南</button>
+      <button class="btn-menu-action" id="menuMuteBtn" onclick="toggleMute(event)">🔊 聲音：開</button>
+    </div>
+
+    <div class="menu-music-tip">💡 支援自由拖曳、點擊對調與自動入槽 💡</div>
+  </div>
+
+  <!-- 頂部 HUD -->
+  <div class="top-bar">
+    <div class="status-left">
+      <div class="shame-badge" id="shameRank">稱號：名偵探見習</div>
+      <div class="hearts" id="hpDisplay">❤️❤️❤️</div>
+    </div>
+    <div class="controls-right">
+      <button class="comic-btn btn-mute" id="gameMuteBtn" onclick="toggleMute()">🔊 聲音：開</button>
+      <button class="comic-btn" onclick="openTutorial()">新手指南</button>
+      <button class="comic-btn" onclick="toggleFullscreen()">⛶ 全螢幕切換</button>
+    </div>
+  </div>
+
+  <!-- 主舞台 -->
+  <div class="main-stage">
+    <div class="game-area">
+      <div class="case-banner">
+        <div class="case-title" id="caseTitle">第 1 關：美術館名畫消失之謎</div>
+        <div class="case-target" id="caseTarget">操作方式：可自由拖曳、點卡片自動放入、或點兩個卡槽對調！</div>
+      </div>
+
+      <!-- 4 格卡槽 -->
+      <div class="slots-container">
+        <div class="slots-grid">
+          <div class="slot" data-index="0" onclick="handleSlotInteraction(0)">
+            <span class="slot-badge">第 1 格</span>
+            <span class="slot-empty-hint">拖曳 / 點擊放入</span>
+          </div>
+          <div class="slot" data-index="1" onclick="handleSlotInteraction(1)">
+            <span class="slot-badge">第 2 格</span>
+            <span class="slot-empty-hint">拖曳 / 點擊放入</span>
+          </div>
+          <div class="slot" data-index="2" onclick="handleSlotInteraction(2)">
+            <span class="slot-badge">第 3 格</span>
+            <span class="slot-empty-hint">拖曳 / 點擊放入</span>
+          </div>
+          <div class="slot" data-index="3" onclick="handleSlotInteraction(3)">
+            <span class="slot-badge">第 4 格</span>
+            <span class="slot-empty-hint">拖曳 / 點擊放入</span>
+          </div>
+        </div>
+        <button class="btn-action-play" onclick="startComicShow()">▶ 演出這部漫畫！</button>
+      </div>
+
+      <!-- 下方卡片庫 -->
+      <div class="card-pool" id="cardPool"></div>
+    </div>
+
+    <!-- 實況彈幕聊天室 -->
+    <div class="stream-chat">
+      <div class="chat-header">
+        <span>🔴 實況彈幕室</span>
+        <span class="live-dot"></span>
+      </div>
+      <div class="chat-messages" id="chatBox">
+        <div class="chat-msg"><span class="chat-user">觀眾老李:</span> 主播準備好被語音洗臉了嗎？</div>
+        <div class="chat-msg"><span class="chat-user">百萬賭徒:</span> 賭 100 塊主播這把又要在天台見</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全螢幕漫畫放映室 -->
+  <div class="theater-screen" id="theaterScreen">
+    <div class="comic-stage" id="comicStageBox">
+      <div class="comic-frame-number" id="frameNumber">FRAME #1</div>
+      <div class="comic-viewport">
+        <div class="speedlines"></div>
+        <div id="comicEmoji">🎬</div>
+      </div>
+      <div class="comic-caption-box" id="comicCaption">推演準備中...</div>
+      <div class="comic-stamp" id="comicStamp">CASE CLOSED</div>
+      <button class="comic-btn" id="btnNextLevel" style="display:none; background: var(--green); font-size: 22px; padding: 10px 32px; margin-top: 15px;" onclick="proceedToNextLevel()">進入下一關 ➔</button>
+      <button class="comic-btn" id="btnRetryLevel" style="display:none; background: var(--yellow); font-size: 20px; padding: 8px 24px; margin-top: 15px;" onclick="closeTheaterOnly()">關閉重整順序</button>
+    </div>
+  </div>
+
+  <div class="playback-blocker" id="playbackBlocker"></div>
+
+  <!-- 實況處刑台：社死道歉聲明書 -->
+  <div class="overlay-modal" id="punishModal">
+    <div class="punish-box">
+      <div style="font-size: 32px; font-weight: 900; background: var(--red); color:#fff; border: 4px solid #000; padding: 6px 24px;">
+        🚨 翻車處刑：公開道歉記者會 🚨
+      </div>
+      <div style="font-size: 18px; font-weight: bold; color: #333;">
+        【實況主懲罰】你已耗盡體力，請對著鏡頭與麥克風大聲朗讀以下聲明：
+      </div>
+      <div class="apology-paper" id="apologyText">
+        <b>【公開道歉聲明】</b><br>
+        本人於今日直播中，因智商暫時離線、邏輯全面宕機，無法看透肥皂水與貓咪的深奧因果。身為一名實況主，我對不起在場全體觀眾的期待，特此向聊天室全體磕頭謝罪！我承認我才是真正的搞笑擔當！
+      </div>
+      <button class="comic-btn" style="background: var(--yellow); font-size: 22px; padding: 12px 30px;" onclick="resetFromPunish()">🙇‍♂️ 我唸完了，磕頭重啟本關</button>
+    </div>
+  </div>
+
+  <!-- 全通關荒謬封神大反轉 -->
+  <div class="overlay-modal" id="victoryModal">
+    <div class="victory-box">
+      <div style="font-size: 36px; font-weight: 900; background: #000; color: #fff; padding: 6px 24px; border: 4px solid #fff;">
+        🏆 終極大反轉：世界最高法院 🏆
+      </div>
+      <div style="font-size: 80px; margin: 10px 0;">
+        🧹 🤖 🐈 🏅
+      </div>
+      <div style="font-size: 22px; font-weight: 900; line-height: 1.6; color: #000;">
+        【歷史性的一刻！】<br>
+        三大真兇：<b>清潔阿姨、掃地機器人、大肥橘貓</b> 同台牽手，獲頒聯合國「維護世界和平勳章」！<br><br>
+        <span style="color: var(--red); font-size: 24px;">
+          👨‍⚖️ 法官敲槌判決：「實況主偵探因揭穿太多蠢事，嚴重破壞社會和諧！當場逮捕！帶走！」
+        </span>
+      </div>
+      <div style="font-size: 50px;">
+        🚔 🚨 🚓
+      </div>
+      <button class="comic-btn" style="background: #fff; font-size: 22px; padding: 12px 36px;" onclick="restartFullGame()">蛤？！被警車載走並重新開台</button>
+    </div>
+  </div>
+
+  <!-- 新手指南 -->
+  <div class="overlay-modal" id="tutorialModal">
+    <div class="punish-box" style="background: #fff;">
+      <div style="font-size: 30px; font-weight: 900; background: var(--cyan); border: 4px solid #000; padding: 6px 24px;">
+        📖 新手操作指南
+      </div>
+      <div style="font-size: 19px; text-align: left; line-height: 2; font-weight: bold; width: 100%; padding: 10px 16px;">
+        👉 <b>自由拖曳（Drag）：</b> 抓起下方卡片可直接拖進任意卡槽，也能在卡槽間拖曳互換！<br>
+        👉 <b>快速點擊：</b> 點擊下方卡片自動填入第一個空槽；點選上方卡槽可退回卡池。<br>
+        👉 <b>卡槽對調：</b> 先後點擊兩個已放卡的卡槽，即可瞬間對調位置！<br>
+        👉 <b>播放推演：</b> 排滿 4 格後點擊「▶ 演出這部漫畫」，觀賞荒謬因果！<br>
+        👉 <b>留意體力：</b> 每關擁有 3 顆愛心 ❤️❤️❤️️，猜錯會扣血喔！
+      </div>
+      <button class="comic-btn" style="background: var(--yellow); font-size: 22px; padding: 10px 32px;" onclick="closeTutorial()">我知道了，出發！</button>
+    </div>
+  </div>
+
+  <script>
+    /* =========================================
+       1. 全域靜音 (Mute) 與語音 / 音效控制
+       ========================================= */
+    let isMuted = false;
+    let audioCtx = null;
+    let menuBgmInterval = null;
+    let isMenuBgmRunning = false;
+
+    function initAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+
+    function toggleMute(e) {
+      if (e) e.stopPropagation();
+      isMuted = !isMuted;
+      const label = isMuted ? "🔇 靜音：開" : "🔊 聲音：開";
+
+      document.getElementById('menuMuteBtn').textContent = label;
+      document.getElementById('gameMuteBtn').textContent = label;
+
+      if (isMuted) {
+        document.getElementById('menuMuteBtn').classList.add('is-muted');
+        document.getElementById('gameMuteBtn').classList.add('is-muted');
+        if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      } else {
+        document.getElementById('menuMuteBtn').classList.remove('is-muted');
+        document.getElementById('gameMuteBtn').classList.remove('is-muted');
+      }
+    }
+
+    function playTone(freq, dur, type = 'sine', gainVal = 0.2) {
+      if (isMuted || !audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + dur);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + dur);
+      } catch (e) {}
+    }
+
+    function tryPlayMenuBGM() {
+      initAudio();
+      if (isMenuBgmRunning || isMuted) return;
+      isMenuBgmRunning = true;
+
+      const bassNotes = [130.8, 164.8, 196.0, 220.0];
+      const melodyNotes = [523.2, 587.3, 659.2, 783.9, 659.2, 587.3];
+      let step = 0;
+
+      menuBgmInterval = setInterval(() => {
+        if (!isMenuBgmRunning || isMuted) return;
+        const bFreq = bassNotes[Math.floor(step / 2) % bassNotes.length];
+        playTone(bFreq, 0.2, 'triangle', 0.12);
+
+        if (step % 2 === 0) {
+          const mFreq = melodyNotes[step % melodyNotes.length];
+          playTone(mFreq, 0.12, 'square', 0.04);
+        }
+        step++;
+      }, 230);
+    }
+
+    function stopMenuBGM() {
+      if (menuBgmInterval) {
+        clearInterval(menuBgmInterval);
+        menuBgmInterval = null;
+      }
+      isMenuBgmRunning = false;
+    }
+
+    function onStartGameClicked(e) {
+      if (e) e.stopPropagation();
+      initAudio();
+      stopMenuBGM();
+      sfxCardThud();
+      document.getElementById('startMenuScreen').style.display = 'none';
+      switchLevel(1);
+    }
+
+    function onTutorialClicked(e) {
+      if (e) e.stopPropagation();
+      tryPlayMenuBGM();
+      openTutorial();
+    }
+
+    /* =========================================
+       2. 1.5 倍速噴飯專屬語音庫 (答錯搞心態 / 答對陰陽怪氣)
+       ========================================= */
+    function speak15x(text) {
+      if (isMuted || !('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'zh-TW';
+      utter.rate = 1.5;
+      utter.pitch = 1.1;
+      window.speechSynthesis.speak(utter);
+    }
+
+    // 答錯嘲諷庫
+    const TAUNT_SPEECHES = [
+      { text: "笑死！這因果關係你敢排？我把滑鼠綁在我阿嬤的輪椅上，讓她滑過來排都比你合邏輯！", tag: "阿嬤開台" },
+      { text: "嗶嗶！系統檢測到現場有一名實況主智商正在以跳水速度跌停板！請觀眾立刻遠離螢幕，避免被降智感染！", tag: "智商跌停" },
+      { text: "哇塞！這是哪門子的通靈神技？小偷都還沒進來你就讓他摔倒，你是在預判未來的未來還是被外星人附身？", tag: "大預言家" },
+      { text: "感謝主播的精湛反向操作！剛才下注主播猜錯的觀眾已經在挑豪宅了，下注主播猜對的請立刻前往天台排隊！", tag: "天台好冷" },
+      { text: "這操作連我家那隻只會舔毛的貓看了都直搖頭，並且留下了兩滴同情的眼淚。扣血！下去反省！", tag: "貓都搖頭" }
+    ];
+
+    // 答對陰陽怪氣庫
+    const PRAISE_SPEECHES = [
+      { text: "天啊！奇蹟出現了！瞎貓居然真的踩死了一隻特大號耗子！聊天室快截圖，這可能是主播這輩子唯一的智商高光時刻！", tag: "瞎貓踩死耗子" },
+      { text: "全體起立！福爾摩斯轉世！柯南看了連夜買站票逃跑！這匪夷所思的答案居然能被你矇對，你老實交代是不是偷偷看了攻略？！", tag: "絕對偷看攻略" },
+      { text: "不可思議！這波操作簡直是秦始皇摸電線，贏麻了！連掃地阿姨都被你的荒謬邏輯深深折服！", tag: "秦始皇摸電線" },
+      { text: "破案了！但是兇手表示不服！小偷在警車上痛哭流涕，抗議這個世界上怎麼會有邏輯這麼抽象的破案過程！", tag: "小偷表示不服" }
+    ];
+
+    /* =========================================
+       3. Web Audio 重打擊音效
+       ========================================= */
+    function sfxCardThud() {
+      initAudio();
+      playTone(110, 0.12, 'triangle', 0.4);
+      setTimeout(() => playTone(80, 0.16, 'sine', 0.4), 20);
+    }
+
+    function sfxCardSwap() {
+      initAudio();
+      playTone(440, 0.08, 'sine', 0.25);
+      setTimeout(() => playTone(660, 0.1, 'sine', 0.25), 40);
+    }
+
+    function sfxCardRemove() {
+      initAudio();
+      playTone(320, 0.08, 'sine', 0.25);
+    }
+
+    function sfxPageWhoosh() {
+      initAudio();
+      playTone(400, 0.06, 'sawtooth', 0.2);
+      setTimeout(() => playTone(800, 0.1, 'sine', 0.25), 30);
+    }
+
+    function sfxVictoryBell() {
+      initAudio();
+      [587.3, 880, 1174.7].forEach((f, idx) => {
+        setTimeout(() => playTone(f, 0.6, 'sine', 0.4), idx * 140);
+      });
+    }
+
+    function sfxFailBoing() {
+      initAudio();
+      playTone(280, 0.15, 'sawtooth', 0.35);
+      setTimeout(() => playTone(140, 0.35, 'sawtooth', 0.4), 80);
+    }
+
+    function playGrandFinaleSymphony() {
+      initAudio();
+      const fanfare = [
+        { f: 523.2, d: 0.18, t: 0 },
+        { f: 523.2, d: 0.18, t: 180 },
+        { f: 523.2, d: 0.18, t: 360 },
+        { f: 659.2, d: 0.5,  t: 540 },
+        { f: 783.9, d: 0.6,  t: 900 },
+        { f: 1046.5, d: 0.8, t: 1300 }
+      ];
+
+      fanfare.forEach(n => setTimeout(() => playTone(n.f, n.d, 'triangle', 0.4), n.t));
+
+      setTimeout(() => {
+        let toggle = false;
+        const sirenTimer = setInterval(() => {
+          playTone(toggle ? 750 : 960, 0.18, 'sawtooth', 0.35);
+          toggle = !toggle;
+        }, 180);
+        setTimeout(() => clearInterval(sirenTimer), 2400);
+      }, 2200);
+    }
+
+    function sfxSiren() {
+      initAudio();
+      let toggle = false;
+      const timer = setInterval(() => {
+        playTone(toggle ? 750 : 950, 0.2, 'sawtooth', 0.25);
+        toggle = !toggle;
+      }, 200);
+      setTimeout(() => clearInterval(timer), 1800);
+    }
+
+    /* =========================================
+       4. 豐富彩蛋與專屬打臉判定矩陣
+       ========================================= */
+    const LEVEL_DATA = {
+      1: {
+        title: "第 1 關：美術館名畫消失之謎",
+        target: "目標：推導出名畫被洗成抹布的真正順序！",
+        cards: [
+          { id: "A", emoji: "🥷🪟", title: "小偷破窗潛入！", label: "A: 破窗潛入" },
+          { id: "B", emoji: "🧹🧼", title: "清潔阿姨狂打肥皂水！", label: "B: 肥皂拖地" },
+          { id: "C", emoji: "🤲🖼️️", title: "小偷伸手笑納名畫...", label: "C: 伸手取畫" },
+          { id: "D", emoji: "🤸💥", title: "小偷騰空重摔暈厥！", label: "D: 打滑摔暈" },
+          { id: "E", emoji: "🐕🎨", title: "柴犬叼黑油漆踩滿畫布！", label: "E: 柴犬踩油漆" },
+          { id: "F", emoji: "🚰🧽", title: "阿姨誤當髒布鋼刷猛洗！", label: "F: 當抹布刷洗" }
+        ],
+        resolve: (seq) => {
+          if (seq === 'BADF') return {
+            success: true, emoji: '🎉🧼',
+            text: '【荒謬真兇揭曉！】<br>阿姨洗地太滑 ➔ 小偷破窗重摔暈厥 ➔ 畫震落水桶 ➔ 阿姨誤當抹布刷成白紙！真兇是阿姨！',
+            stamp: '破案 CLOSED', stampColor: 'var(--green)'
+          };
+          if (seq.startsWith('AEC')) return {
+            success: false, emoji: '🐶😭',
+            text: '【小偷心態大崩潰！】<br>小偷翻進來赫然發現柴犬早已踩滿狗頭塗鴉！小偷當場痛哭自首！',
+            stamp: '小偷自首 LOL', stampColor: 'var(--yellow)'
+          };
+          if (seq.startsWith('C')) return {
+            success: false, emoji: '🤷‍♂️💨',
+            text: '【隔空抓空氣！】<br>人還在窗戶外面呢！哪來的手伸進來摸畫？這是在隔空抓藥還是通靈？',
+            stamp: '摸到空氣 FAIL', stampColor: 'var(--red)'
+          };
+          if (seq.startsWith('D')) return {
+            success: false, emoji: '🤸❓',
+            text: '【極限碰瓷現場！】<br>開場沒有窗戶、沒有肥皂水，小偷無預警在半空中原地大劈叉摔暈！碰瓷界的驕傲！',
+            stamp: '原地摔暈 FAIL', stampColor: 'var(--red)'
+          };
+          if (seq.startsWith('F')) return {
+            success: false, emoji: '🧱🧽',
+            text: '【水泥工狂喜！】<br>畫根本沒掉下來，阿姨拿著鋼刷對著展覽館水泥牆一頓猛刷，磁磚都被刷飛了！',
+            stamp: '狂刷牆壁 LOL', stampColor: 'var(--yellow)'
+          };
+          if (seq === 'ACDB') return {
+            success: false, emoji: '🦅❓',
+            text: '【因果矛盾！】<br>小偷正要摸畫突然原地摔成狗吃屎？摔完阿姨才進來拖地？觀眾集體刷問號！',
+            stamp: '邏輯矛盾 ✘', stampColor: 'var(--red)'
+          };
+          return {
+            success: false, emoji: '💥🤯',
+            text: '【推演失敗！】現場一團大混亂，這幾件事完全湊不到一塊！名畫到底去哪了？',
+            stamp: '推理失敗 ✘', stampColor: 'var(--red)'
+          };
+        }
+      },
+      2: {
+        title: "第 2 關：深夜機房斷線大慘案",
+        target: "目標：揪出讓全機房斷線的真正元兇！",
+        cards: [
+          { id: "A", emoji: "🕶️🪓", title: "特務黑客帥氣垂降入侵！", label: "A: 特務降臨" },
+          { id: "B", emoji: "🤖🧹", title: "掃地機器人半夜啟動出巡！", label: "B: 掃地機出巡" },
+          { id: "C", emoji: "✂️🔌", title: "手拿大剪刀剪斷黑色主線！", label: "C: 剪斷主線" },
+          { id: "D", emoji: "🐹🧀", title: "肥倉鼠慌不擇路撞總開關！", label: "D: 倉鼠撞開關" },
+          { id: "E", emoji: "🌀⚡", title: "掃地機捲緊電線硬拔插頭！", label: "E: 捲線拔插頭" },
+          { id: "F", emoji: "🚨❌", title: "全機房警報大響全網癱瘓！", label: "F: 機房大斷電" }
+        ],
+        resolve: (seq) => {
+          if (seq === 'BEDF') return {
+            success: true, emoji: '🤖🐹',
+            text: '【科技慘案真相！】<br>定時掃地機啟動 ➔ 捲線把伺服器插頭拔掉 ➔ 肥倉鼠嚇到撞飛備用開關 ➔ 全網大斷線！',
+            stamp: '全網癱瘓 ✔', stampColor: 'var(--green)'
+          };
+          if (seq.startsWith('ACF') || seq.startsWith('AC')) return {
+            success: false, emoji: '🤦‍♂️✂️',
+            text: '【特務白忙一場！】<br>黑客帥氣剪斷電線，才發現剪的是裝飾假線，真線埋在地下！尷尬石化！',
+            stamp: '剪到假線 ✘', stampColor: 'var(--red)'
+          };
+          if (seq.startsWith('BC')) return {
+            success: false, emoji: '🤖✂️',
+            text: '【AI 覺醒：終結者！】<br>掃地機器人自己長出了兩隻手，拿起園藝大剪刀對著網路線一頓亂剪！天網降臨！',
+            stamp: '機械暴動 LOL', stampColor: 'var(--yellow)'
+          };
+          if (seq.startsWith('D')) return {
+            success: false, emoji: '🐹💤',
+            text: '【倉鼠不想努力了！】<br>沒有掃地機在後面追，肥倉鼠抱著起司直接躺在地上呼呼大睡，機房歲月靜好！',
+            stamp: '倉鼠睡死 FAIL', stampColor: 'var(--red)'
+          };
+          if (seq.startsWith('E')) return {
+            success: false, emoji: '👻🔌',
+            text: '【機房靈異事件！】<br>掃地機都還沒啟動，插頭竟然在空中自己扭動脫落！IT人員嚇得連夜離職！',
+            stamp: '機房鬧鬼 LOL', stampColor: 'var(--yellow)'
+          };
+          return {
+            success: false, emoji: '💥🤯',
+            text: '【時序混亂！】機器人、黑客與老鼠亂成一團，根本找不到斷線主因！',
+            stamp: '推演失敗 ✘', stampColor: 'var(--red)'
+          };
+        }
+      },
+      3: {
+        title: "第 3 關：華爾街黑色星期五崩盤案",
+        target: "目標：推導出引爆全球金融海嘯的終極荒謬因果！",
+        cards: [
+          { id: "A", emoji: "🕶️💼", title: "金融巨鱷獰笑按放空按鈕！", label: "A: 巨鱷放空" },
+          { id: "B", emoji: "♨️⌨️", title: "嫌冷打開鍵盤保溫發熱墊！", label: "B: 鍵盤保溫墊" },
+          { id: "C", emoji: "📉⚡", title: "融資連環斷頭股市大崩盤！", label: "C: 全面斷頭" },
+          { id: "D", emoji: "🐈💤", title: "大胖橘貓一屁股坐上鍵盤！", label: "D: 橘貓坐鍵盤" },
+          { id: "E", emoji: "🛑🔥", title: "Enter 長按送出無限市價拋售！", label: "E: 連打拋售" },
+          { id: "F", emoji: "🌍💥", title: "全球市場蒸發各國交易員崩潰！", label: "F: 全球蒸發" }
+        ],
+        resolve: (seq) => {
+          if (seq === 'BDEC') return {
+            success: true, emoji: '🐱📈',
+            text: '【史詩荒謬大結局！】<br>開鍵盤暖墊 ➔ 肥橘貓跳上去取暖壓住 Enter ➔ 觸發無限拋售 ➔ 引爆全市場大斷頭！元兇是橘貓！',
+            stamp: '全盤皆貓 CAT', stampColor: 'var(--green)'
+          };
+          if (seq.startsWith('ACF') || seq.startsWith('AC')) return {
+            success: false, emoji: '💸🚫',
+            text: '【貧窮限制了陰謀！】<br>巨鱷按放空按鈕，跳出「帳戶餘額不足，手續費扣款失敗」，巨鱷雪茄掉地上！',
+            stamp: '餘額不足 ✘', stampColor: 'var(--red)'
+          };
+          if (seq.startsWith('D')) return {
+            success: false, emoji: '😾🧊',
+            text: '【主子嫌冷！】<br>鍵盤連暖墊都沒開，大橘貓用肉球碰了一下嫌太冰，轉頭跳去經理人頭頂睡覺！',
+            stamp: '貓不賞臉 FAIL', stampColor: 'var(--red)'
+          };
+          if (seq.startsWith('E')) return {
+            success: false, emoji: '👊⌨️',
+            text: '【物理物理摧毀鍵盤！】<br>經理人無能狂怒用拳頭狂捶 Enter 鍵，鍵盤當場碎成八塊，單子一張都沒送出去！',
+            stamp: '鍵盤陣亡 LOL', stampColor: 'var(--yellow)'
+          };
+          if (seq.startsWith('F')) return {
+            success: false, emoji: '📉😱',
+            text: '【集體精神幻覺！】<br>大家都還沒開始操作，交易員就抱頭尖叫跳樓！原來只是看錯別家股票代碼！',
+            stamp: '看錯代碼 LOL', stampColor: 'var(--yellow)'
+          };
+          return {
+            success: false, emoji: '📉💥',
+            text: '【因果不合！】買賣單混亂交錯，無法推導出黑色星期五的崩盤真相！',
+            stamp: '邏輯不通 ✘', stampColor: 'var(--red)'
+          };
+        }
+      }
+    };
+
+    /* =========================================
+       5. 狀態與懲罰邏輯
+       ========================================= */
+    let currentLevel = 1;
+    let mistakes = 0;
+    const SHAME_RANKS = [
+      "稱號：名偵探見習",
+      "稱號：通靈神棍 🔮",
+      "稱號：法院認證笨蛋 🤡",
+      "🚨 社死處刑中 🚨"
+    ];
+
+    function updateStatusHUD() {
+      const remainingHp = 3 - mistakes;
+      const hearts = ['🖤🖤🖤', '❤️🖤🖤', '❤️❤️🖤', '❤️❤️❤️'];
+      document.getElementById('hpDisplay').textContent = hearts[Math.max(0, remainingHp)];
+      document.getElementById('shameRank').textContent = SHAME_RANKS[Math.min(3, mistakes)];
+    }
+
+    function registerMistake() {
+      mistakes++;
+      updateStatusHUD();
+      document.getElementById('appBody').classList.add('shake-screen');
+      setTimeout(() => document.getElementById('appBody').classList.remove('shake-screen'), 400);
+
+      if (mistakes < 3) {
+        // 隨機抽選 1.5 倍速狂暴嘲諷
+        const item = TAUNT_SPEECHES[Math.floor(Math.random() * TAUNT_SPEECHES.length)];
+        speak15x(item.text);
+        pushChatMessage('fail_special', item.tag);
+      } else {
+        setTimeout(triggerPunishModal, 600);
+      }
+    }
+
+    function triggerPunishModal() {
+      sfxSiren();
+      document.getElementById('theaterScreen').style.display = 'none';
+      document.getElementById('punishModal').style.display = 'flex';
+      speak15x("肅靜！三次推演全部失敗！請實況主立刻對著鏡頭與麥克風，大聲朗讀公開道歉聲明書，向全體觀眾磕頭謝罪！");
+    }
+
+    function resetFromPunish() {
+      document.getElementById('punishModal').style.display = 'none';
+      mistakes = 0;
+      switchLevel(currentLevel);
+    }
+
+    /* =========================================
+       6. 實況彈幕聊天室 (深度連動語音梗)
+       ========================================= */
+    const CHAT_LIBRARY = {
+      idle: [
+        "主播這手速是睡著了嗎？",
+        "我阿嬤來點都比你合邏輯",
+        "笑死，這順序根本猜不到吧",
+        "前排兜售爆米花與衛生紙 🍿",
+        "主播不要再通靈了拜託"
+      ],
+      win: [
+        "神神神神神！77777777",
+        "這反轉太荒謬了哈哈哈哈哈！",
+        "笑爛，真兇居然是阿姨/橘貓！",
+        "這破案真的笑爛，實況效果做滿！"
+      ],
+      win_special: [
+        "這語音陰陽怪氣太頂了哈哈哈哈！",
+        "代打！絕對是代打！查水表！",
+        "瞎貓踩死耗子笑死我了",
+        "秦始皇摸電線都出來了，贏麻了！"
+      ],
+      fail: [
+        "？？？？？？？？？？",
+        "名偵探翻車現場！",
+        "這是在演哪齣？扣血啦！",
+        "準備看主播開記者會道歉囉！"
+      ],
+      fail_special: [
+        "阿嬤輪椅排得比你強哈哈哈哈！",
+        "天台風好大！主播賠錢！",
+        "救命啊，智商被傳染跌停了！",
+        "貓都搖頭了，主播下去反省吧！"
+      ]
+    };
+
+    function pushChatMessage(type = 'idle', customTag = null) {
+      const chatBox = document.getElementById('chatBox');
+      const pool = CHAT_LIBRARY[type] || CHAT_LIBRARY.idle;
+      let randomMsg = pool[Math.floor(Math.random() * pool.length)];
+
+      if (customTag) {
+        randomMsg = `【${customTag}】${randomMsg}`;
+      }
+
+      const users = ["熱心市民", "鍵盤柯南", "股市韭菜王", "機房管理員", "吃瓜路人", "天台管理員"];
+      const randomUser = users[Math.floor(Math.random() * users.length)];
+
+      const msgEl = document.createElement('div');
+      msgEl.className = 'chat-msg';
+      msgEl.innerHTML = `<span class="chat-user">${randomUser}:</span> ${randomMsg}`;
+      chatBox.appendChild(msgEl);
+
+      if (chatBox.children.length > 9) chatBox.removeChild(chatBox.firstChild);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    setInterval(() => pushChatMessage('idle'), 4500);
+
+    /* =========================================
+       7. 操作矩陣：拖曳 (Drag&Drop) + 點擊對調 + 自動補位
+       ========================================= */
+    let draggedCard = null;
+    let selectedSlotForSwap = null;
+
+    function switchLevel(lvl) {
+      currentLevel = lvl;
+      selectedSlotForSwap = null;
+      const lvlData = LEVEL_DATA[lvl];
+      document.getElementById('caseTitle').textContent = lvlData.title;
+
+      document.querySelectorAll('.slot').forEach(s => {
+        const c = s.querySelector('.card');
+        if (c) c.remove();
+        s.querySelector('.slot-empty-hint').style.display = 'block';
+        s.classList.remove('selected-swap');
+      });
+
+      const pool = document.getElementById('cardPool');
+      pool.innerHTML = '';
+
+      lvlData.cards.forEach(c => {
+        const cardEl = createCardElement(c);
+        pool.appendChild(cardEl);
+      });
+      updateStatusHUD();
+    }
+
+    function createCardElement(c) {
+      const cardEl = document.createElement('div');
+      cardEl.className = 'card';
+      cardEl.id = `card-${c.id}`;
+      cardEl.draggable = true;
+      cardEl.dataset.emoji = c.emoji;
+      cardEl.dataset.title = c.title;
+
+      cardEl.innerHTML = `
+        <div class="card-sketch">${c.emoji}</div>
+        <div class="card-caption">${c.label}</div>
+      `;
+
+      cardEl.onclick = (e) => {
+        e.stopPropagation();
+        if (cardEl.parentElement.classList.contains('card-pool')) {
+          putCardIntoFirstAvailableSlot(cardEl);
+        }
+      };
+
+      cardEl.addEventListener('dragstart', (e) => {
+        initAudio();
+        draggedCard = cardEl;
+        e.dataTransfer.setData('text/plain', cardEl.id);
+        e.dataTransfer.effectAllowed = 'move';
+        setTimeout(() => cardEl.classList.add('dragging-origin'), 0);
+      });
+
+      cardEl.addEventListener('dragend', () => {
+        cardEl.classList.remove('dragging-origin');
+        draggedCard = null;
+      });
+
+      return cardEl;
+    }
+
+    function putCardIntoFirstAvailableSlot(cardEl) {
+      const slots = document.querySelectorAll('.slot');
+      let targetSlot = null;
+      for (let s of slots) {
+        if (!s.querySelector('.card')) {
+          targetSlot = s;
+          break;
+        }
+      }
+
+      if (targetSlot) {
+        targetSlot.querySelector('.slot-empty-hint').style.display = 'none';
+        targetSlot.appendChild(cardEl);
+        sfxCardThud();
+      } else {
+        cardEl.style.transform = 'translate(-4px, 0)';
+        setTimeout(() => cardEl.style.transform = 'translate(4px, 0)', 80);
+        setTimeout(() => cardEl.style.transform = '', 160);
+      }
+    }
+
+    function handleSlotInteraction(slotIdx) {
+      initAudio();
+      const slots = document.querySelectorAll('.slot');
+      const clickedSlot = slots[slotIdx];
+      const clickedCard = clickedSlot.querySelector('.card');
+
+      if (selectedSlotForSwap !== null) {
+        if (selectedSlotForSwap === slotIdx) {
+          clickedSlot.classList.remove('selected-swap');
+          selectedSlotForSwap = null;
+          return;
+        }
+
+        const sourceSlot = slots[selectedSlotForSwap];
+        sourceSlot.classList.remove('selected-swap');
+        swapSlotCards(sourceSlot, clickedSlot);
+        selectedSlotForSwap = null;
+        sfxCardSwap();
+        return;
+      }
+
+      if (clickedCard) {
+        selectedSlotForSwap = slotIdx;
+        clickedSlot.classList.add('selected-swap');
+
+        setTimeout(() => {
+          if (selectedSlotForSwap === slotIdx) {
+            clickedSlot.classList.remove('selected-swap');
+            selectedSlotForSwap = null;
+            document.getElementById('cardPool').appendChild(clickedCard);
+            clickedSlot.querySelector('.slot-empty-hint').style.display = 'block';
+            sfxCardRemove();
+          }
+        }, 300);
+      }
+    }
+
+    function swapSlotCards(slotA, slotB) {
+      const cardA = slotA.querySelector('.card');
+      const cardB = slotB.querySelector('.card');
+
+      if (cardA) slotB.appendChild(cardA);
+      if (cardB) slotA.appendChild(cardB);
+
+      slotA.querySelector('.slot-empty-hint').style.display = slotA.querySelector('.card') ? 'none' : 'block';
+      slotB.querySelector('.slot-empty-hint').style.display = slotB.querySelector('.card') ? 'none' : 'block';
+    }
+
+    // 拖曳放置目標
+    const dropZones = [...document.querySelectorAll('.slot'), document.getElementById('cardPool')];
+    dropZones.forEach(zone => {
+      zone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        zone.classList.add('drag-over');
+      });
+      zone.addEventListener('dragleave', () => {
+        zone.classList.remove('drag-over');
+      });
+      zone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.classList.remove('drag-over');
+        if (!draggedCard) return;
+
+        if (zone.id === 'cardPool') {
+          const oldParent = draggedCard.parentElement;
+          zone.appendChild(draggedCard);
+          if (oldParent && oldParent.classList.contains('slot')) {
+            oldParent.querySelector('.slot-empty-hint').style.display = 'block';
+          }
+          sfxCardRemove();
+          return;
+        }
+
+        if (zone.classList.contains('slot')) {
+          const targetCard = zone.querySelector('.card');
+          const sourceSlot = draggedCard.parentElement.classList.contains('slot') ? draggedCard.parentElement : null;
+
+          if (targetCard) {
+            if (sourceSlot) {
+              sourceSlot.appendChild(targetCard);
+              zone.appendChild(draggedCard);
+              sfxCardSwap();
+            } else {
+              document.getElementById('cardPool').appendChild(targetCard);
+              zone.appendChild(draggedCard);
+              sfxCardThud();
+            }
+          } else {
+            if (sourceSlot) {
+              sourceSlot.querySelector('.slot-empty-hint').style.display = 'block';
+            }
+            zone.appendChild(draggedCard);
+            sfxCardThud();
+          }
+
+          zone.querySelector('.slot-empty-hint').style.display = 'none';
+        }
+      });
+    });
+
+    /* =========================================
+       8. 漫畫放映與結局演繹 (結合語音與音效)
+       ========================================= */
+    function startComicShow() {
+      const slots = document.querySelectorAll('.slot');
+      const cards = [];
+
+      for (let s of slots) {
+        const c = s.querySelector('.card');
+        if (!c) {
+          alert('請先將 4 格漫畫全部填滿！');
+          return;
+        }
+        cards.push(c);
+      }
+
+      initAudio();
+      const screen = document.getElementById('theaterScreen');
+      const blocker = document.getElementById('playbackBlocker');
+      const frameNum = document.getElementById('frameNumber');
+      const emojiEl = document.getElementById('comicEmoji');
+      const captionEl = document.getElementById('comicCaption');
+      const stampEl = document.getElementById('comicStamp');
+      const nextBtn = document.getElementById('btnNextLevel');
+      const retryBtn = document.getElementById('btnRetryLevel');
+
+      screen.style.display = 'flex';
+      blocker.style.display = 'block';
+
+      stampEl.className = 'comic-stamp';
+      nextBtn.style.display = 'none';
+      retryBtn.style.display = 'none';
+
+      const seq = cards.map(c => c.id.replace('card-', '')).join('');
+      let currentStep = 0;
+
+      function playStep() {
+        if (currentStep < 4) {
+          sfxPageWhoosh();
+          const curCard = cards[currentStep];
+          frameNum.textContent = `第 ${currentStep + 1} 格`;
+          emojiEl.textContent = curCard.dataset.emoji;
+          captionEl.textContent = curCard.dataset.title;
+
+          emojiEl.style.transform = `scale(1.2) rotate(${Math.random() * 8 - 4}deg)`;
+          setTimeout(() => emojiEl.style.transform = "scale(1)", 150);
+
+          currentStep++;
+          setTimeout(playStep, 1300);
+        } else {
+          showFinalOutcome(seq);
+        }
+      }
+      playStep();
+    }
+
+    function showFinalOutcome(seq) {
+      const frameNum = document.getElementById('frameNumber');
+      const emojiEl = document.getElementById('comicEmoji');
+      const captionEl = document.getElementById('comicCaption');
+      const stampEl = document.getElementById('comicStamp');
+      const nextBtn = document.getElementById('btnNextLevel');
+      const retryBtn = document.getElementById('btnRetryLevel');
+      const blocker = document.getElementById('playbackBlocker');
+
+      frameNum.textContent = `案件推演結果`;
+      const result = LEVEL_DATA[currentLevel].resolve(seq);
+
+      if (result.success) {
+        sfxVictoryBell();
+
+        // 答對時：隨機抽選陰陽怪氣語音，聊天室狂刷
+        const item = PRAISE_SPEECHES[Math.floor(Math.random() * PRAISE_SPEECHES.length)];
+        speak15x(item.text);
+        pushChatMessage('win_special', item.tag);
+
+        if (currentLevel < 3) {
+          nextBtn.style.display = 'block';
+          nextBtn.textContent = `破案成功！進入第 ${currentLevel + 1} 關 ➔`;
+          nextBtn.onclick = proceedToNextLevel;
+        } else {
+          nextBtn.style.display = 'block';
+          nextBtn.textContent = `🏆 見證終極荒謬封神審判！`;
+          nextBtn.onclick = triggerGrandFinale;
+        }
+      } else {
+        sfxFailBoing();
+        registerMistake();
+        retryBtn.style.display = 'block';
+      }
+
+      emojiEl.textContent = result.emoji;
+      captionEl.innerHTML = result.text;
+      stampEl.textContent = result.stamp;
+      stampEl.style.borderColor = result.stampColor;
+      stampEl.style.color = result.stampColor;
+      stampEl.classList.add('show');
+
+      setTimeout(() => {
+        blocker.style.display = 'none';
+      }, 500);
+    }
+
+    function closeTheaterOnly() {
+      document.getElementById('theaterScreen').style.display = 'none';
+      document.getElementById('playbackBlocker').style.display = 'none';
+    }
+
+    function proceedToNextLevel() {
+      closeTheaterOnly();
+      switchLevel(currentLevel + 1);
+    }
+
+    function triggerGrandFinale() {
+      closeTheaterOnly();
+      playGrandFinaleSymphony();
+      document.getElementById('victoryModal').style.display = 'flex';
+
+      setTimeout(() => {
+        speak15x("最高法院判決！實況主偵探因揭穿太多蠢事，嚴重破壞社會和諧！當場逮捕！帶走！");
+      }, 1800);
+    }
+
+    function restartFullGame() {
+      document.getElementById('victoryModal').style.display = 'none';
+      mistakes = 0;
+      switchLevel(1);
+    }
+
+    /* =========================================
+       9. 輔助功能
+       ========================================= */
+    function openTutorial() { document.getElementById('tutorialModal').style.display = 'flex'; }
+    function closeTutorial() { document.getElementById('tutorialModal').style.display = 'none'; }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+  </script>
+</body>
+</html>
